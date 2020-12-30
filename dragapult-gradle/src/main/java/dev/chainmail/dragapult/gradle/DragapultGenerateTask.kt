@@ -18,9 +18,7 @@ import kotlin.reflect.KClass
 
 abstract class DragapultGenerateTask : DefaultTask() {
 
-    //@get:Incremental
     @get:Input
-    //@get:PathSensitive(PathSensitivity.NAME_ONLY)
     abstract var inputFiles: FileCollection
 
     @get:Input
@@ -36,22 +34,8 @@ abstract class DragapultGenerateTask : DefaultTask() {
     abstract val outputDir: DirectoryProperty
 
     @TaskAction
-    fun onAction(/*inputChanges: InputChanges*/) {
-        inputFiles.forEach { input ->
-            /*@Suppress("UnstableApiUsage")
-            if (it.fileType == FileType.DIRECTORY) {
-                return@forEach
-            }
-
-            val input = it.file
-            val output = outputDir.file(it.normalizedPath).get().asFile
-
-            when (it.changeType) {
-                ChangeType.ADDED,
-                ChangeType.MODIFIED ->*/ generateFilesFrom(input)
-            /*ChangeType.REMOVED -> output.delete()
-        }*/
-        }
+    fun onAction() {
+        inputFiles.forEach { generateFilesFrom(it) }
     }
 
     private fun generateFilesFrom(from: File) {
@@ -77,7 +61,7 @@ abstract class DragapultGenerateTask : DefaultTask() {
                 name = "useDragapultOn${project.name.capitalize()}"
             ) {
                 dependsOn(DragapultTask.name(project))
-                inputFiles = project.files(extension.inputFile)
+                inputFiles = project.files(*extension.inputFiles)
                 inputSeparator.set(extension.inputSeparator)
                 inputFormat.set(extension.inputFormat)
                 outputFormat.set(extension.outputFormat)

@@ -10,7 +10,10 @@ val Project.hasLinkedExecutable: Boolean
             }
 
             result.exitValue == 0
-        }.fold({it}, {false})
+        }.fold(
+            onSuccess = { it },
+            onFailure = { false }
+        )
     }
 
 val Project.hasBuildExecutable: Boolean
