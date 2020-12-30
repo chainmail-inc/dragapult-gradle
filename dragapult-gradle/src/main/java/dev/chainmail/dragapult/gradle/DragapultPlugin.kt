@@ -12,6 +12,7 @@ class DragapultPlugin : Plugin<Project> {
     private lateinit var extension: DragapultExtension
 
     override fun apply(target: Project) {
+        DragapultDownloadTask.registerIn(target)
         extension = DragapultExtension.registerIn(target)
         DragapultTask.registerIn(target)
 
