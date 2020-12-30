@@ -1,6 +1,5 @@
 package dev.chainmail.dragapult.gradle
 
-import com.android.build.api.dsl.AndroidSourceSet
 import com.android.build.gradle.api.BaseVariant
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project

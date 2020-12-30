@@ -7,7 +7,8 @@ import java.io.File
 internal object Constants {
 
     const val latestBinaryName = "dragapult.zip"
-    const val latestBinaryUrl = "https://github.com/chainmail-inc/dragapult/releases/latest/download/${latestBinaryName}"
+    const val latestBinaryUrl =
+        "https://github.com/chainmail-inc/dragapult/releases/latest/download/${latestBinaryName}"
 
     fun bundle(project: Project): File {
         return File(tmpDir(project), latestBinaryName)
