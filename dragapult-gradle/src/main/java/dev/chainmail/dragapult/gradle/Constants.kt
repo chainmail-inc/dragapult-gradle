@@ -19,7 +19,7 @@ internal object Constants {
             Os.isFamily(Os.FAMILY_UNIX) || Os.isFamily(Os.FAMILY_MAC) -> "dragapult"
             else -> throw UnsupportedOperationException("Your OS is not supported by dragapult.")
         }
-        return File(project.buildDir, "dragapult-release/bin/${binaryName}")
+        return File(project.buildDir, "dragapult/bin/${binaryName}")
     }
 
     fun tmpDir(project: Project): File {

@@ -4,7 +4,8 @@ import de.undercouch.gradle.tasks.download.Download
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
-import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.register
+import java.io.File
 
 abstract class DragapultTask : DefaultTask() {
 
@@ -25,6 +26,9 @@ abstract class DragapultTask : DefaultTask() {
             into(project.buildDir)
         }
 
+        File(project.buildDir, "dragapult-release")
+            .renameTo(File(project.buildDir, "dragapult"))
+
         Constants.bundle(project).delete()
 
         if (!project.hasDragapult) {
@@ -38,7 +42,7 @@ abstract class DragapultTask : DefaultTask() {
         fun name(project: Project) = "requireDragapultBinaryIn${project.name.capitalize()}"
 
         fun registerIn(project: Project) {
-            project.tasks.register(name(project), DragapultTask::class.java)
+            project.tasks.register<DragapultTask>(name(project))
         }
 
     }
